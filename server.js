@@ -17,7 +17,7 @@ connectDB();
 // Routes
 app.use('/api', recipeRoutes);
 
-// Error Handler
+// Error Handlerz`
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ message: 'Server Error', error: err.message });
