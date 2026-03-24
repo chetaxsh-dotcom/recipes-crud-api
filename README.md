@@ -25,7 +25,7 @@ A complete CRUD API for managing recipes built using Node.js, Express.js and Mon
 ## Installation
 
 1. Clone repository
-2. Run npm install
+2. npm install
 3. Create .env file
 
 MONGO_URI=mongodb+srv://chetansabili_db_user:Offshore2001@recipes-cluster.qxhflj8.mongodb.net/?appName=recipes-cluster

@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Connected");
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/recipes_db');
+    console.log(' MongoDB Connected Successfully');
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error(' MongoDB Connection Error:', error.message);
     process.exit(1);
   }
 };

@@ -1,23 +1,30 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const recipeRoutes = require('./routes/recipeRoutes');
+const connectDB = require('./config/db');
 
 const app = express();
 
+// Middleware
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://127.0.0.1:27017/recipesDB")
-.then(() => console.log("MongoDB connected"))
-.catch(err => console.log(err));
+// Connect Database
+connectDB();
 
-const recipeRoutes = require("./routes/recipeRoutes");
-app.use("/", recipeRoutes);
+// Routes
+app.use('/api', recipeRoutes);
 
-app.get("/test", (req, res) => res.send("test ok"));
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: 'Server Error', error: err.message });
+});
 
-const PORT = 8000;
-
+// Start Server
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(` Server running on http://localhost:${PORT}`);
 });
